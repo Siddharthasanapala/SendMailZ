@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - SENDMAILZ{% endblock %}
+
+{% block content %}
+<style>
+    .home-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    .home-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .home-title {
+        font-size: 2.5rem;
+        color: white;
+        margin-bottom: 1rem;
+        text-align: center;
+        animation: slideDown 0.5s ease-out;
+    }
+
+    .home-subtitle {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        line-height: 1.6;
+    }
+
+    .instructions-title {
+        color: white;
+        font-size: 1.8rem;
+        margin: 2rem 0 1.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .instructions-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 2rem;
+        counter-reset: item;
+    }
+
+    .instructions-list li {
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 1.2rem;
+        padding-left: 3rem;
+        position: relative;
+        line-height: 1.6;
+        display: flex;
+        align-items: flex-start;
+        min-height: 2rem;
+    }
+
+    .instructions-list li::before {
+        content: counter(item) "";
+        counter-increment: item;
+        position: absolute;
+        left: 0;
+        width: 2rem;
+        height: 2rem;
+        background: rgba(0, 172, 193, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        color: white;
+        font-weight: 500;
+    }
+
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    .feature-item {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 1.5rem;
+        border-radius: 15px;
+        text-align: center;
+    }
+
+    .feature-item h3 {
+        color: #00acc1;
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+    }
+
+    .feature-item p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .action-btn {
+        display: block;
+        width: 100%;
+        padding: 1.2rem;
+        font-size: 1.1rem;
+        background: linear-gradient(90deg, #00acc1, #0d47a1);
+        border: none;
+        color: white;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        text-decoration: none;
+        margin-top: 2rem;
+    }
+
+    .action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(90deg, #00bcd4, #1565c0);
+        color: white;
+        text-decoration: none;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideDown {
+        from { 
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<div class="home-container">
+    <div class="home-card">
+        <h1 class="home-title">Welcome to SENDMAILZ</h1>
+        <p class="home-subtitle">Streamline your email campaigns with our powerful mass mailing solution</p>
+
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h3>Bulk Sending</h3>
+                <p>Send emails to multiple recipients efficiently using Excel files</p>
+            </div>
+            <div class="feature-item">
+                <h3>Simple Setup</h3>
+                <p>Just upload your Excel file with email addresses and compose your message</p>
+            </div>
+            <!-- <div class="feature-item">
+                <h3>Quick Delivery</h3>
+                <p>Fast and reliable delivery to all your recipients</p>
+            </div> -->
+        </div>
+
+        <h2 class="instructions-title">How to use SENDMAILZ:</h2>
+        <ol class="instructions-list">
+            <li>Prepare an Excel file (.xlsx or .xls) with a single column named "Emails" containing the recipient email addresses</li>
+            <li>Navigate to the "Send Mails" page using the button below</li>
+            <li>Compose your message (up to 500 words) in the provided text area</li>
+            <li>Upload your prepared Excel file using the file selector</li>
+            <li>Click the "Send Mails" button to deliver your message to all recipients</li>
+        </ol>
+
+        <a href="{% url 'send_mails' %}" class="action-btn">Start Sending Mails</a>
+    </div>
+</div>
+{% endblock %}

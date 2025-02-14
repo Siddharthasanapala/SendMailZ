@@ -1,0 +1,253 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to SENDMAILZ - Bulk Email Service{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        /* min-height: 100vh; */
+    }
+    .welcome-container {
+        /* min-height: 100vh; */
+        /* height: 100%; */
+        width: auto;
+        display: flex;
+        /* flex-direction: column; */
+        justify-content: center;    
+        align-items: center;
+        background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+        position: relative;
+        overflow: hidden;
+        /* padding: 2rem; */
+    }
+
+    .welcome-content {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 1.5rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        z-index: 1;
+        animation: floatIn 1s ease-out;
+        max-width: 800px;
+        width: 90%;
+    }
+
+    .welcome-title {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        animation: fadeIn 1s ease-in forwards;
+        text-align: center;
+    }
+
+    .welcome-subtitle {
+        color: #E0E0E0;
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        animation: slideIn 1s ease-out 0.5s forwards;
+        opacity: 0;
+    }
+
+    .email-animation {
+        position: relative;
+        height: 75px;
+        margin: 2rem 0;
+    }
+
+    .flying-email {
+        position: absolute;
+        font-size: 2.2rem;
+        animation: flyEmail 4s infinite;
+        opacity: 0;
+    }
+
+    .flying-email:nth-child(1) { animation-delay: 0s; }
+    .flying-email:nth-child(2) { animation-delay: 1s; }
+    .flying-email:nth-child(3) { animation-delay: 2s; }
+    .flying-email:nth-child(4) { animation-delay: 3s; }
+
+    .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin: 2rem 0;
+    }
+
+    .feature-item {
+        text-align: center;
+        color: white;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        transition: transform 0.3s ease;
+        animation: fadeIn 0.5s ease-out forwards;
+        opacity: 0;
+    }
+
+    .feature-item:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        animation: pulse 2s infinite;
+    }
+
+    .feature-title {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: #FFF;
+    }
+
+    .feature-description {
+        font-size: 0.9rem;
+        color: #E0E0E0;
+    }
+
+    .button-container {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 2rem;
+        justify-content: center;
+        opacity: 0;
+        animation: slideUp 0.8s ease-out 1s forwards;
+    }
+
+    .welcome-btn {
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .welcome-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-primary {
+        background: linear-gradient(45deg, #00acc1, #00838f);
+        color: white;
+        border: none;
+    }
+
+    .btn-secondary {
+        background: linear-gradient(45deg, #26c6da, #00acc1);
+        color: white;
+        border: none;
+    }
+
+    @keyframes flyEmail {
+        0% {
+            left: -50px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        20% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        80% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        100% {
+            left: calc(100% + 50px);
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+
+    @media (max-width: 768px) {
+        .welcome-title {
+            font-size: 2.2rem;
+        }
+        .features {
+            grid-template-columns: 1fr;
+        }
+        .button-container {
+            flex-direction: column;
+        }
+        .welcome-btn {
+            width: 100%;
+            text-align: center;
+        }
+    }
+</style>
+
+<div class="welcome-container">
+    <div class="welcome-content">
+        <h1 class="welcome-title">SENDMAILZ</h1>
+        <p class="welcome-subtitle">Power up your email campaigns with our bulk mailing solution</p>
+
+        <div class="email-animation">
+            <div class="flying-email">📧</div>
+            <div class="flying-email">📨</div>
+            <div class="flying-email">📩</div>
+            <div class="flying-email">📬</div>
+        </div>
+
+        <div class="features">
+            <!-- <div class="feature-item">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title">Bulk Sending</h3>
+                <p class="feature-description">Send thousands of emails in one click with our optimized delivery system</p>
+            </div> -->
+            <div class="feature-item">
+                <div class="feature-icon">📝</div>
+                <h3 class="feature-title">Easy Template</h3>
+                <p class="feature-description">Create and save email templates for quick campaign setup</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">📈</div>
+                <h3 class="feature-title">Track Success</h3>
+                <p class="feature-description">Monitor delivery rates and campaign performance</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">👥</div>
+                <h3 class="feature-title">Recipient Lists</h3>
+                <p class="feature-description">Manage multiple recipient lists with easy import options</p>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <a href="{% url 'signin' %}" class="welcome-btn btn-primary">Sign In</a>
+            <a href="{% url 'signup' %}" class="welcome-btn btn-secondary">Sign Up</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign In - SENDMAILZ{% endblock %}
+
+{% block content %}
+<style>
+    .signin-container {
+        max-width: 500px;
+        margin: 2rem auto;
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    .signin-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .signin-title {
+        font-size: 2.5rem;
+        color: white;
+        margin-bottom: 1rem;
+        text-align: center;
+        animation: slideDown 0.5s ease-out;
+    }
+
+    .signin-subtitle {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .form-label {
+        color: white;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .form-control {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        padding: 0.8rem 1rem;
+        color: white;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .form-control:focus {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: #00acc1;
+        box-shadow: 0 0 0 2px rgba(0, 172, 193, 0.2);
+        outline: none;
+    }
+
+    .error-message {
+        color: #ff6b6b;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+        animation: shake 0.5s ease-in-out;
+    }
+
+    .signin-btn {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.1rem;
+        background: linear-gradient(45deg, #00acc1, #0d47a1);
+        border: none;
+        color: white;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .signin-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(45deg, #00bcd4, #1565c0);
+    }
+
+    .signup-link ,.mt-3{
+        text-align: center;
+        margin-top: 1.5rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .signup-link a , .mt-3 a{
+        color: #00acc1;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .signup-link a:hover, .mt-3 a:hover {
+        color: #00bcd4;
+        text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideDown {
+        from { 
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        75% { transform: translateX(10px); }
+    }
+</style>
+
+<div class="signin-container">
+    <div class="signin-card">
+        <h1 class="signin-title">Welcome Back</h1>
+        <p class="signin-subtitle">Sign in to access your email campaigns</p>
+
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                    <input type="{{ field.field.widget.input_type }}" 
+                           name="{{ field.name }}" 
+                           id="{{ field.id_for_label }}" 
+                           class="form-control"
+                           {% if field.field.required %}required{% endif %}>
+                    {% if field.errors %}
+                        <div class="error-message">
+                            {% for error in field.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="signin-btn">Sign In</button>
+        </form>
+
+        <div class="signup-link">
+            Don't have an account? <a href="{% url 'signup' %}">Sign Up</a>
+        </div>
+        <br>
+        <div class="mt-3">
+            Forgot your crediantails? <a href="{% url 'forgot_password' %}">Forgot Password</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

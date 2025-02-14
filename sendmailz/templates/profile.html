@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile - SENDMAILZ{% endblock %}
+
+{% block content %}
+<style>
+    .profile-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    .profile-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-title {
+        font-size: 2.5rem;
+        color: white;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        animation: slideDown 0.5s ease-out;
+    }
+
+    .profile-info {
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+        margin: 1.5rem 0;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .profile-info tr {
+        transition: all 0.3s ease;
+    }
+
+    .profile-info tr:nth-child(even) {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .profile-info tr:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .profile-info th,
+    .profile-info td {
+        padding: 1.2rem 1.5rem;
+        color: white;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .profile-info th {
+        font-weight: 600;
+        color: #00acc1;
+        width: 30%;
+        background: rgba(0, 172, 193, 0.1);
+    }
+
+    .profile-info td {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .update-btn {
+        display: inline-block;
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.1rem;
+        background: linear-gradient(45deg, #00acc1, #0d47a1);
+        border: none;
+        color: white;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        text-decoration: none;
+        margin-top: 1rem;
+    }
+
+    .update-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(45deg, #00bcd4, #1565c0);
+        color: white;
+        text-decoration: none;
+    }
+
+    .info-section {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .info-title {
+        color: #00acc1;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .info-text {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideDown {
+        from { 
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<div class="profile-container">
+    <div class="profile-card">
+        <h1 class="profile-title">User Profile</h1>
+
+        <div class="info-section">
+            <h3 class="info-title">Account Information</h3>
+            <p class="info-text">Review and manage your SENDMAILZ account details below.</p>
+        </div>
+
+        <table class="profile-info">
+            <tr>
+                <th>Username</th>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Sender Email</th>
+                <td>{{ user.sender_email }}</td>
+            </tr>
+            <tr>
+                <th>Key</th>
+                <td>{{ user.key }}</td>
+            </tr>
+        </table>
+
+        <a href="{% url 'update_profile' %}" class="update-btn">Update Profile</a>
+    </div>
+</div>
+{% endblock %}

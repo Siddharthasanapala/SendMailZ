@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Profile - SENDMAILZ{% endblock %}
+
+{% block content %}
+<style>
+    .update-profile-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    .update-profile-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .update-profile-title {
+        font-size: 2.5rem;
+        color: white;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        animation: slideDown 0.5s ease-out;
+    }
+
+    .update-profile-subtitle {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        line-height: 1.6;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        color: white;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        color: white;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: #00acc1;
+        box-shadow: 0 0 0 2px rgba(0, 172, 193, 0.2);
+        outline: none;
+    }
+
+    .error-message {
+        color: #ff6b6b;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+        animation: shake 0.5s ease-in-out;
+    }
+
+    .update-btn {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.1rem;
+        background: linear-gradient(45deg, #00acc1, #0d47a1);
+        border: none;
+        color: white;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+    }
+
+    .update-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(45deg, #00bcd4, #1565c0);
+    }
+
+    .info-section {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .info-title {
+        color: #00acc1;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .info-text {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideDown {
+        from { 
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        75% { transform: translateX(10px); }
+    }
+</style>
+
+<div class="update-profile-container">
+    <div class="update-profile-card">
+        <h1 class="update-profile-title">Update Profile</h1>
+        <p class="update-profile-subtitle">Modify your account settings and preferences</p>
+
+        <div class="info-section">
+            <h3 class="info-title">Profile Settings</h3>
+            <p class="info-text">Update your SENDMAILZ account information below. All fields are required.</p>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="error-message">
+                            {% for error in field.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="update-btn">Save Changes</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
