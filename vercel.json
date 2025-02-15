@@ -4,7 +4,8 @@
       {
         "src": "manage.py",
         "use": "@vercel/python",
-        "config": { 
+        "config": {
+          "runtime": "python3.10",
           "installCommand": "apt-get update && apt-get install -y libpq-dev && pip install -r requirements.txt"
         }
       }
