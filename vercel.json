@@ -2,14 +2,14 @@
     "version": 2,
     "builds": [
       {
-        "src": "sendmailz/wsgi.py",
+        "src": "manage.py",
         "use": "@vercel/python"
       }
     ],
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "sendmailz/wsgi.py"
+        "dest": "manage.py"
       }
     ]
   }
