@@ -5,4 +5,4 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sendmailz.settings")
 
 
 application = get_wsgi_application()
-handler = get_wsgi_application()
+app=application

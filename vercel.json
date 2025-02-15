@@ -1,14 +1,23 @@
 {
-  "version": 2,
   "builds": [
-    { "src": "manage.py", "use": "@vercel/python" }
+    {
+      "src" : "sendmailz/wsgi.py",
+      "use" : "@verccel/python",
+      "config" : {
+        "maxLambdaSize" : "15mb",
+        "runtime" : "python3.10",
+        "buildCommand" : "bash setup.sh"
+      }
+    }
   ],
-  "routes": [
-    { "src": "/(.*)", "dest": "manage.py" }
-  ],
-  "env": {
-    "DJANGO_SETTINGS_MODULE": "sendmailz.settings",
-    "DATABASE_URL": "postgres://user:password@hostname:port/dbname",
-    "SECRET_KEY": "django-insecure-=*wb&u-3g49@_fynb0*k^_x@qe7r)n$5_g&e(0ngv=292!or#l"
-  }
+  "routes" : [
+    {
+      "src" : "/(.*)",
+      "dest" : "sendmailz/wsgi.py"
+    },
+    {
+      "src" : "/static/(.*)",
+      "dest" : "static/$1"
+    }
+  ]
 }

@@ -35,7 +35,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 
 DEBUG = os.environ["DEBUG"]
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",") + ["sendmailz.vercel.app"]
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
 
 # Application definitio
 
@@ -88,11 +88,14 @@ WSGI_APPLICATION = 'sendmailz.wsgi.application'
 
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL'),
-        conn_max_age=600,
-        ssl_require=True 
-    )
+    "default": {
+        "ENGINE": os.environ["ENGINE"],
+        "NAME": os.environ["NAME"],
+        "USER": os.environ["USER"],
+        "PASSWORD": os.environ["PASSWORD"],
+        "HOST": os.environ["HOST"],
+        "PORT": os.environ["PORT"],
+    }
 }
 
 
