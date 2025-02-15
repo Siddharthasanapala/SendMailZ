@@ -1,4 +1,4 @@
 #!/bin/bash
 python manage.py migrate
 python manage.py collectstatic --noinput
-gunicorn sendmailz.wsgi
+gunicorn sendmailz.wsgi:application
