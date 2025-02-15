@@ -4,14 +4,11 @@
       {
         "src": "manage.py",
         "use": "@vercel/python",
-        "config": { "installCommand": "apt-get update && apt-get install -y libpq-dev && pip install -r requirements.txt" }
+        "config": { 
+          "installCommand": "apt-get update && apt-get install -y libpq-dev && pip install -r requirements.txt"
+        }
       }
     ],
-    "framework": "other",
-    "functions": {
-      "api/*": {
-        "runtime": "python@3.11"
-      }
-    }
+    "framework": "other"
   }
   
