@@ -27,7 +27,7 @@ def send_mails(request):
             emails = [cell.value for cell in sheet['A'][1:] if cell.value]  # Assuming emails are in column A
             
             # Prepare attachments
-            attachment = request.FILES.getlist('attachments')
+            attachments = request.FILES.getlist('attachments')
 
             # Send emails with attachments securely
             # Establish custom SMTP connection for the desired sender
@@ -49,7 +49,7 @@ def send_mails(request):
                 )
 
                 # Attach files securely with proper MIME types
-                if attachment:
+                for attachment in attachments:
                     mime_type, _ = mimetypes.guess_type(attachment.name)
                     if not mime_type:
                         mime_type = 'application/octet-stream'
